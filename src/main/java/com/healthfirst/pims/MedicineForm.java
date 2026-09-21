@@ -98,40 +98,29 @@ public class MedicineForm extends javax.swing.JFrame {
 
         jLabel2.setText("Name:");
 
-        txtName.setText("jTextField1");
-
         jLabel3.setText("Company:");
 
         jLabel4.setText("Medicine type:");
 
-        txtCompany.setText("jTextField2");
         txtCompany.addActionListener(this::txtCompanyActionPerformed);
-
-        txtType.setText("jTextField3");
 
         jLabel5.setText("Price:");
 
-        txtPrice.setText("jTextField4");
-
         jLabel6.setText("Quantity in stock:");
-
-        txtQuantity.setText("jTextField5");
 
         jLabel7.setText("Reoder Level:");
 
-        txtReorderLevel.setText("jTextField6");
-
         jLabel8.setText("Expiry date:");
 
-        txtExpiryDate.setText("jTextField7");
+        txtExpiryDate.addActionListener(this::txtExpiryDateActionPerformed);
 
         jLabel9.setText("Supplier ID:");
 
-        txtSupplierId.setText("jTextField8");
-
         btnAdd.setText("Add");
+        btnAdd.addActionListener(this::btnAddActionPerformed);
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(this::btnUpdateActionPerformed);
 
         btnDelete.setText("Delete");
 
@@ -149,6 +138,11 @@ public class MedicineForm extends javax.swing.JFrame {
                 "ID", "Name", "Company", "Type", "Price", "Quantity", "Reorder Level", "Expiry Date", "Supplier ID"
             }
         ));
+        tblMedicines.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMedicinesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblMedicines);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,45 +156,44 @@ public class MedicineForm extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(170, 170, 170)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtReorderLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtExpiryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtReorderLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSupplierId))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCompany))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtExpiryDate)))
+                                .addGap(122, 122, 122))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtName))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 9, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
@@ -210,7 +203,12 @@ public class MedicineForm extends javax.swing.JFrame {
                         .addComponent(btnClear)
                         .addGap(18, 18, 18)
                         .addComponent(btnBack)
-                        .addGap(38, 38, 38))))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(270, 270, 270))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,6 +267,169 @@ public class MedicineForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                          
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        try {
+    String name = txtName.getText().trim();
+    String company = txtCompany.getText().trim();
+    String medicineType = txtType.getText().trim();
+    double price = Double.parseDouble(txtPrice.getText().trim());
+    int quantity = Integer.parseInt(txtQuantity.getText().trim());
+    int reorderLevel = Integer.parseInt(txtReorderLevel.getText().trim());
+    String expiryDate = txtExpiryDate.getText().trim();
+    int supplierId = Integer.parseInt(txtSupplierId.getText().trim());
+
+    String sql = "INSERT INTO medicines "
+            + "(name, company, medicine_type, price, quantity_in_stock, "
+            + "reorder_level, expiry_date, supplier_id) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        pst.setString(1, name);
+        pst.setString(2, company);
+        pst.setString(3, medicineType);
+        pst.setDouble(4, price);
+        pst.setInt(5, quantity);
+        pst.setInt(6, reorderLevel);
+        pst.setDate(7, java.sql.Date.valueOf(expiryDate));
+        pst.setInt(8, supplierId);
+
+        pst.executeUpdate();
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Medicine added successfully!"
+        );
+
+        loadMedicines();
+    }
+
+} catch (NumberFormatException e) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Price, quantity, reorder level and supplier ID must be valid numbers.",
+            "Input Error",
+            JOptionPane.ERROR_MESSAGE
+    );
+
+} catch (IllegalArgumentException e) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Expiry date must be entered as YYYY-MM-DD.",
+            "Date Error",
+            JOptionPane.ERROR_MESSAGE
+    );
+
+} catch (SQLException e) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Error adding medicine: " + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+    );
+}
+    }                                      
+
+    private void tblMedicinesMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        int selectedRow = tblMedicines.getSelectedRow();
+
+if (selectedRow != -1) {
+    txtName.setText(tblMedicines.getValueAt(selectedRow, 1).toString());
+    txtCompany.setText(tblMedicines.getValueAt(selectedRow, 2).toString());
+    txtType.setText(tblMedicines.getValueAt(selectedRow, 3).toString());
+    txtPrice.setText(tblMedicines.getValueAt(selectedRow, 4).toString());
+    txtQuantity.setText(tblMedicines.getValueAt(selectedRow, 5).toString());
+    txtReorderLevel.setText(tblMedicines.getValueAt(selectedRow, 6).toString());
+    txtExpiryDate.setText(tblMedicines.getValueAt(selectedRow, 7).toString());
+    txtSupplierId.setText(tblMedicines.getValueAt(selectedRow, 8).toString());
+}
+    }                                         
+
+    private void txtExpiryDateActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
+       int selectedRow = tblMedicines.getSelectedRow();
+
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(
+        this,
+        "Please select a medicine to update.",
+        "No Medicine Selected",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
+
+try {
+    int medicineId = Integer.parseInt(
+        tblMedicines.getValueAt(selectedRow, 0).toString()
+    );
+
+    String name = txtName.getText().trim();
+    String company = txtCompany.getText().trim();
+    String medicineType = txtType.getText().trim();
+    double price = Double.parseDouble(txtPrice.getText().trim());
+    int quantity = Integer.parseInt(txtQuantity.getText().trim());
+    int reorderLevel = Integer.parseInt(txtReorderLevel.getText().trim());
+    String expiryDate = txtExpiryDate.getText().trim();
+    int supplierId = Integer.parseInt(txtSupplierId.getText().trim());
+
+    String sql = "UPDATE medicines SET "
+            + "name = ?, company = ?, medicine_type = ?, price = ?, "
+            + "quantity_in_stock = ?, reorder_level = ?, expiry_date = ?, "
+            + "supplier_id = ? WHERE medicine_id = ?";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        pst.setString(1, name);
+        pst.setString(2, company);
+        pst.setString(3, medicineType);
+        pst.setDouble(4, price);
+        pst.setInt(5, quantity);
+        pst.setInt(6, reorderLevel);
+        pst.setString(7, expiryDate);
+        pst.setInt(8, supplierId);
+        pst.setInt(9, medicineId);
+
+        int rowsUpdated = pst.executeUpdate();
+
+        if (rowsUpdated > 0) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Medicine updated successfully!"
+            );
+
+            loadMedicines();
+        }
+    }
+
+} catch (NumberFormatException e) {
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Price, quantity, reorder level and supplier ID must be valid numbers.",
+        "Input Error",
+        JOptionPane.ERROR_MESSAGE
+    );
+
+} catch (SQLException e) {
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Error updating medicine: " + e.getMessage(),
+        "Database Error",
+        JOptionPane.ERROR_MESSAGE
+    );
+}
+    }                                         
+
     /**
      * @param args the command line arguments
      */
@@ -321,3 +482,4 @@ public class MedicineForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtType;
     // End of variables declaration                   
 }
+
