@@ -4,10 +4,7 @@
  */
 package com.healthfirst.pims;
 
-/**
- *
- * @author user
- */
+import javax.swing.JOptionPane;
 public class AdminDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashboard.class.getName());
@@ -52,6 +49,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnUsers.setText("Manage Users");
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,6 +105,23 @@ public class AdminDashboard extends javax.swing.JFrame {
     medicineForm.setVisible(true);
     this.setVisible(false);
     }                                            
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                          
+            int choice = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to logout?",
+            "Logout",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if (choice == JOptionPane.YES_OPTION) {
+        LoginForm login = new LoginForm();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+
+        this.dispose();
+    }
+    }                                         
 
     /**
      * @param args the command line arguments
