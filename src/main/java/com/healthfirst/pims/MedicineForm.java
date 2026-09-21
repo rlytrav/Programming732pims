@@ -123,6 +123,7 @@ public class MedicineForm extends javax.swing.JFrame {
         btnUpdate.addActionListener(this::btnUpdateActionPerformed);
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
 
         btnClear.setText("Clear");
 
@@ -430,6 +431,70 @@ try {
 }
     }                                         
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
+       int selectedRow = tblMedicines.getSelectedRow();
+
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(
+        this,
+        "Please select a medicine to delete.",
+        "No Medicine Selected",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
+
+int medicineId = Integer.parseInt(
+        tblMedicines.getValueAt(selectedRow, 0).toString()
+);
+
+int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to delete this medicine?",
+        "Confirm Delete",
+        JOptionPane.YES_NO_OPTION
+);
+
+if (confirm == JOptionPane.YES_OPTION) {
+
+    String sql = "DELETE FROM medicines WHERE medicine_id = ?";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        pst.setInt(1, medicineId);
+
+        int rowsAffected = pst.executeUpdate();
+
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Medicine deleted successfully!"
+            );
+
+            loadMedicines();
+
+            txtName.setText("");
+            txtCompany.setText("");
+            txtType.setText("");
+            txtPrice.setText("");
+            txtQuantity.setText("");
+            txtReorderLevel.setText("");
+            txtExpiryDate.setText("");
+            txtSupplierId.setText("");
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(
+            this,
+            "Error deleting medicine: " + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    }                                         
+
     /**
      * @param args the command line arguments
      */
@@ -482,4 +547,3 @@ try {
     private javax.swing.JTextField txtType;
     // End of variables declaration                   
 }
-
