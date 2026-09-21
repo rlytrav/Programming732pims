@@ -129,6 +129,7 @@ public class MedicineForm extends javax.swing.JFrame {
         btnClear.addActionListener(this::btnClearActionPerformed);
 
         btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
         tblMedicines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -509,6 +510,11 @@ tblMedicines.clearSelection();
 
 txtName.requestFocus();
     }                                        
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
+         new AdminDashboard().setVisible(true);
+    this.dispose();
+    }                                       
 
     /**
      * @param args the command line arguments
