@@ -108,8 +108,10 @@ public class SalesForm extends javax.swing.JFrame {
         btnCompleteSale.addActionListener(this::btnCompleteSaleActionPerformed);
 
         btnClear.setText("Clear");
+        btnClear.addActionListener(this::btnClearActionPerformed);
 
         btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -443,6 +445,24 @@ public class SalesForm extends javax.swing.JFrame {
     }
 }
     }                                               
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        DefaultTableModel model =
+        (DefaultTableModel) tblSaleItems.getModel();
+
+    model.setRowCount(0);
+
+    cmbMedicine.setSelectedIndex(0);
+    txtQuantity.setText("");
+    txtPrice.setText("");
+    lblTotal.setText("Total: R0.00");
+    }                                        
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        AdminDashboard dashboard = new AdminDashboard();
+    dashboard.setVisible(true);
+    this.dispose();
+    }                                       
  private void updateTotal() {
     DefaultTableModel model =
             (DefaultTableModel) tblSaleItems.getModel();
@@ -480,6 +500,7 @@ public class SalesForm extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new SalesForm().setVisible(true));
     }
 
